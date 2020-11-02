@@ -30,3 +30,4 @@ Rake::TestTask.new(:test) do |t|
 end
 
 task default: :test
+load 'lib/tasks/your_engine_tasks.rake'
