@@ -4,15 +4,16 @@
     <title>Share files app</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'share_files_app/application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'share_files_app/application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'share_files_app/application' %>
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" /> 
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-bar-color-overrride fixed-top">
       <%= link_to(root_path, html_options = {class: 'navbar-brand'}) do %>
-        <img src="<%= image_url('share_files_app/logo.png') %>" width="30" height="30" alt="logo">
+        <%= image_tag 'share_files_app/logo.png', width: "30", height: "30", alt: "logo" %>
       <% end %>
       <%= link_to "ShareFiles", root_path, class: "navbar-brand" %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -55,7 +56,7 @@
                         <div class="carousel-item">
                       <% end %>
                           <%= link_to("https://#{url}", html_options = {target: "_blank", class: ''}) do %>
-                            <img src="<%= image_url("share_files_app/carousel/#{file}") %>" class="d-block w-100" alt="...">
+                            <%= image_tag "share_files_app/carousel/#{file}", class: "d-block w-100", alt: "..." %>
                             <div class="carousel-caption d-none d-md-block">
                               <h2 class="display-4">
                                 <% if @text[file].present? %>
@@ -97,16 +98,16 @@
 
 		<footer class="footer-distributed">
 			<div class="footer-right">
-				<a href="https://<%= ShareFilesApp::AppConfig['links']['facebook'] %>"><i class="fa fa-facebook"></i></a>
-				<a href="https://<%= ShareFilesApp::AppConfig['links']['twitter'] %>"><i class="fa fa-twitter"></i></a>
-				<a href="https://<%= ShareFilesApp::AppConfig['links']['linkedin'] %>"><i class="fa fa-linkedin"></i></a>
-				<a href="https://<%= ShareFilesApp::AppConfig['links']['github'] %>"><i class="fa fa-github"></i></a>
+				<a href="https://<%= Rails.application.credentials.aws[:links][:facebook] %>"><i class="fa fa-facebook"></i></a>
+				<a href="https://<%= Rails.application.credentials.aws[:links][:twitter] %>"><i class="fa fa-twitter"></i></a>
+				<a href="https://<%= Rails.application.credentials.aws[:links][:linkedin] %>"><i class="fa fa-linkedin"></i></a>
+				<a href="https://<%= Rails.application.credentials.aws[:links][:github] %>"><i class="fa fa-github"></i></a>
 			</div>
 
 			<div class="footer-left">
 				<p class="footer-links">
           <%= link_to "Home", root_path, class: 'link-1' %>
-					<a href="<%= ShareFilesApp::AppConfig['links']['blog'] %>">Blog</a>
+					<a href="<%= Rails.application.credentials.aws[:links][:blog] %>">Blog</a>
 				</p>
 				<p>ShareFiles &copy; 2020</p>
 			</div>
