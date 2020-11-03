@@ -1,5 +1,6 @@
 class DeleteAlertMailWorker
   include Sidekiq::Worker
+  sidekiq_options queue: 'sharefilesapp', backtrace: true
 
   def perform(file_sender_id)
     file_sender = ShareFilesApp::FileSender.active.find_by_id(file_sender_id)

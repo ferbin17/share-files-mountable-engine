@@ -1,5 +1,6 @@
 class PaperclipCreateWoker
   include Sidekiq::Worker
+  sidekiq_options queue: 'sharefilesapp', backtrace: true
 
   def perform(upload_id)
     upload = ShareFilesApp::Upload.find_by_id(upload_id)

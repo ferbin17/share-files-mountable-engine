@@ -1,9 +1,9 @@
 module ShareFilesApp
   class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
-    # rescue_from ActiveRecord::RecordNotFound, with: :not_record_found 
-    # rescue_from Exception, with: :not_found
-    # rescue_from ActionController::RoutingError, with: :not_found
+    rescue_from ActiveRecord::RecordNotFound, with: :not_record_found 
+    rescue_from Exception, with: :error
+    rescue_from ActionController::RoutingError, with: :not_found
     before_action :find_carousels
     
     def raise_not_found
@@ -11,16 +11,17 @@ module ShareFilesApp
     end
   
     def not_found
-      flash[:notice] = "Page not found"
+      flash[:warning] = "Page not found"
       respond_to do |format|
-        format.html { render file: Rails.public_path.join('404.html'), status: :not_found, layout: false }
+        format.html{ redirect_to :root}
+        # format.html { render file: Rails.public_path.join('404.html'), status: :not_found, layout: false }
         format.xml { head :not_found }
         format.any { head :not_found }
       end
     end
     
     def not_record_found
-      flash[:notice] = "No record found with ID"
+      flash[:warning] = "No record found with ID"
       respond_to do |format|
         format.html { redirect_to :root }
         format.xml { head :not_found }
@@ -29,9 +30,10 @@ module ShareFilesApp
     end
     
     def error
-      flash[:notice] = "Encountered some error. Sorry for the inconvenience"
+      flash[:warning] = "Encountered some error. Sorry for the inconvenience"
       respond_to do |format|
-        format.html { render file: Rails.public_path.join('500.html'), status: :not_found, layout: false }
+        format.html{ redirect_to :root}
+        # format.html { render file: Rails.public_path.join('500.html'), status: :not_found, layout: false }
         format.xml { head :not_found }
         format.any { head :not_found }
       end
