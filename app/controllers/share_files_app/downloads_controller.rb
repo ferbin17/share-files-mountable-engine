@@ -18,8 +18,9 @@ module ShareFilesApp
         if @file_sender.zip_exists
           "#{Rails.root}/tmp/download/download_#{@file_sender.id}.zip" 
         else
-          @file_sender.create_zip.name
+          tmp_path = @file_sender.create_zip.name
           sleep(30)
+          tmp_path
         end
       send_file path, filename: "download_#{@file_sender.id}.zip", disposition: 'inline'
     end
