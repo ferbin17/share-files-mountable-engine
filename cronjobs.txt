@@ -1,0 +1,1 @@
+42 18 * * * ~/mf17/my_website/vendor/engines/share_files_app/rake_runner.sh >> ~/mf17/my_website/log 2>&1
