@@ -1,6 +1,6 @@
 module ShareFilesApp
   class DeleteAlertJob < ApplicationJob
-    queue_as :default
+    queue_as :sharefilesapp
 
     def perform
       count = 0
