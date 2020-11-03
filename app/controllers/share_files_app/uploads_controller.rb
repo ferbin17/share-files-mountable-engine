@@ -28,7 +28,7 @@ module ShareFilesApp
         FileUtils.mkdir_p(dir) unless File.exist?(dir)
         @upload = @file_sender.uploads.new(filename: filename, file_size: params[:file_size], path: File.join(dir, "#{uuid}#{ext}"))
         if @file_sender.save
-          download_url = url_for(controller: :downloads, action: :download, id: @file_sender.uuid)
+          download_url = url_for(controller: :downloads, action: :show, id: @file_sender.uuid)
           @file_sender.update(download_url: download_url)
           render json: { id: @upload.id, filename: @upload.filename, uploaded_size: @upload.uploaded_size, file_size: @upload.file_size }
         else
